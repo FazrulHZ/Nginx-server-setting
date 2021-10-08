@@ -6,6 +6,8 @@ server {
         proxy_set_header   Host $http_host;
         proxy_pass         http://localhost:3000;
     }
+    
+    client_max_body_size 10M;
 
     listen 443 ssl; # managed by Certbot
     ssl_certificate /etc/letsencrypt/live/api.hamzah-dev.com/fullchain.pem; # managed by Certbot
