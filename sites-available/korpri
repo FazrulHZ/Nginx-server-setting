@@ -1,0 +1,24 @@
+server {
+	listen 80;
+	listen [::]:80;
+
+	server_name korpri.gorontaloprov.go.id;
+	
+	root /home/kepeg/korpri/vue-korpri/dist;
+        location / {
+                try_files $uri $uri/ /index.html;
+        }
+
+        error_log  /var/log/nginx/vue-app-error.log;
+        access_log /var/log/nginx/vue-app-access.log;
+
+
+	location /api {
+		proxy_pass http://localhost:60000;
+		proxy_http_version 1.1;
+		proxy_set_header Upgrade $http_upgrade;
+		proxy_set_header Connection 'upgrade';
+		proxy_set_header Host $host;
+		proxy_cache_bypass $http_upgrade;
+	}
+}
